@@ -17,4 +17,3 @@ reflect from blocks after their destruction.
 # Win/loss conditions
 The player loses when the ball is not caught by the platform. Victory can be achieved by
 destroying all blocks and catching the ball with the platform after.
-The game should be restarted after victory/loss.
