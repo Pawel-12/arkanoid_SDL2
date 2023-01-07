@@ -1,0 +1,18 @@
+WINDOWWIDTH = 800
+WINDOWHEIGHT = 600
+platform_speed = 0.035
+ball_speed = 0.0035
+COLS = 1
+ROWS = 1
+platformSprite = 50
+ballSprite = 58
+blockSprite = 1
+backgroundSprite = 65
+lostSprite = 67
+winSprite = 68
+backgroundSprite = 65
+abilitydownSprite = 42
+abilityupSprite = 41
+
+
+
