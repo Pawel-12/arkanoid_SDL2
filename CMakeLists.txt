@@ -11,6 +11,13 @@ include_directories(${SDL2_INCLUDE_DIR})
 link_directories(${SDL2_LIB_DIR})
 
 
-add_executable(arkanoid_game_sdl2 main.cpp sdl_framework_files/sdl_framework.cpp sdl_framework_files/sdl_framework.h sdl_framework_files/Window.cpp sdl_framework_files/Window.h sdl_framework_files/Sprite.cpp sdl_framework_files/Sprite.h sdl_framework_files/Entity.cpp sdl_framework_files/Entity.h sdl_framework_files/logSDLerr.cpp sdl_framework_files/logSDLerr.h main.h Platform.h Ball.h)
+file(
+        GLOB_RECURSE SOURCES LIST_DIRECTORIES true
+        ${CMAKE_CURRENT_LIST_DIR}/*.h
+        ${CMAKE_CURRENT_LIST_DIR}/sdl_framework_files/*.h
+        ${CMAKE_CURRENT_LIST_DIR}/sdl_framework_files/*.cpp
+)
+
+add_executable(arkanoid_game_sdl2 main.cpp  ${SOURCES})
 
 target_link_libraries(arkanoid_game_sdl2 mingw32 SDL2main SDL2 SDL2_image zlib1 libjpeg-9 libpng16-16)
