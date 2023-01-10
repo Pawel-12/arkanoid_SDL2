@@ -19,5 +19,7 @@ file(
 )
 
 add_executable(arkanoid_game_sdl2 main.cpp  ${SOURCES})
+set_target_properties(arkanoid_game_sdl2 PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/bin")
+
 
 target_link_libraries(arkanoid_game_sdl2 mingw32 SDL2main SDL2 SDL2_image zlib1 libjpeg-9 libpng16-16)
