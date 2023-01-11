@@ -14,6 +14,9 @@ player's platform.
 # Environment
 The level consists of blocks, which could be destroyed by a single hit. The ball should
 reflect from blocks after their destruction.
+The platform sometimes (randomly, with a chance 15%) catches the ball instead of deflecting it. The player is able to choose the direction and shoot on the left mouse button.
+The first ability (positive) increases and the second one (negative) decreases the speed of the platform by 40%. Ability stays active for 20 seconds. Abilities are “stackable”, it means that it is possible to have multiple active instances of the same ability. Minimum speed is 50%, maximum is 200% of a default speed.
+Abilities spawn in a random position every 15 seconds. Abilities do not collide with blocks (fall through them), but still collide with a platform. 
 # Win/loss conditions
 The player loses when the ball is not caught by the platform. Victory can be achieved by
 destroying all blocks and catching the ball with the platform after.
