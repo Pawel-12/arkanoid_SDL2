@@ -1,3 +1,0 @@
-C:/Users/Pawel/Desktop/clion_projects/Nowy folder/cmake-build-debug/CMakeFiles/arkanoid_game_sdl2.dir
-C:/Users/Pawel/Desktop/clion_projects/Nowy folder/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Pawel/Desktop/clion_projects/Nowy folder/cmake-build-debug/CMakeFiles/rebuild_cache.dir
