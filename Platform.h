@@ -17,6 +17,8 @@ public:
     { return speed;}
     void setspeed(double s)
     { speed = s;}
+    void addspeed(double s)
+    { speed += s;}
     virtual ~Platform (){};
     virtual void movex(const int & a)
     {

@@ -16,19 +16,20 @@ extern float WINDOWHEIGHT;
 class Window
 {
 private:
-    float x = 800;                                 // window width
-    float y = 600;                                 // window height
-    bool flscr = false;                            // if fullscreen
+    float width  = 800;                             // window width
+    float height = 600;                            // window height
+    bool flscr   = false;                          // if fullscreen
     SDL_Window * winSDL = nullptr;                 // pointer to SDL_Window object
     static SDL_Renderer * render;                  // static pointer to SDL_Renderer object
 
 public:
-    Window(float x2, float y2, bool fl): x(x2),y(y2),flscr(fl){}                 // construct Window object
+    Window(float w, float h, bool fl): width(w), height(h), flscr(fl){}          // construct Window object
     Window()= default;
     ~Window()                                                                    // destruct Window object cleanup
     {SDL_DestroyWindow( winSDL );SDL_DestroyRenderer(render);}
-    [[nodiscard]] float WX()const{return x;}                                     // return width
-    [[nodiscard]] float WY()const{return y;}                                     // return height
+    bool setsize(float w, float h, bool fl = false);                             // set Window size
+    [[nodiscard]] float getwidth()const{return width;}                           // return width
+    [[nodiscard]] float getheight()const{return height;}                         // return height
     //const bool WFL()const{return flscr;}                                       // return true if fullscreen
     SDL_Window * get_win_SDL(){return winSDL;}                                   // return pointer to SDL_Window object
     SDL_Renderer * getrend(){return render;}                                     // return pointer to SDL_Renderer object

@@ -1,5 +1,6 @@
 WINDOWWIDTH = 800
 WINDOWHEIGHT = 600
+FULLSCREEN = 0
 platform_speed = 0.035
 ball_speed = 0.0035
 COLS = 10

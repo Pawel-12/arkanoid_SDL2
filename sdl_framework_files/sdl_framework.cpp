@@ -46,16 +46,16 @@ bool Handle_Console_Args(Window & w, const int & argc, char* argv[] )
         }
 
     // assign values to Window
-    w = Window(WINDOWWIDTH, WINDOWHEIGHT, FLSCR);
+    w.setsize(WINDOWWIDTH, WINDOWHEIGHT, FLSCR);
     return true;
 }
 
-int frameworkrun(SDL_Framework * f){
+int frameworkrun(SDL_Framework * f, const int & argc, char* argv[]){
 
     if(!f->LoadConfig())
         return 0;
-
-    if(!f->Init())
+    
+    if(!f->Init( argc, argv))
         return 0;
 
     SDL_Event e;

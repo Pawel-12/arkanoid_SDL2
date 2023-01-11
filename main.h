@@ -44,9 +44,8 @@ private:
     std::unordered_map<std::string, float> conf;
     std::unordered_map<int, Sprite> sprites;
 public:
-    ARKANOID_GAME(const int & argc, char* argv[]){
+    ARKANOID_GAME(){
         window = new Window();
-        Handle_Console_Args(*window, argc, argv);
     }
     virtual ~ARKANOID_GAME() {
         window->Close_SDL();
@@ -67,7 +66,7 @@ public:
 
         while (fconfig && std::getline(fconfig, strInput) )        // read lines until file end
         {
-            std::string part1{},part2{"0"};
+            std::string part1{},part2{};
             std::istringstream iss{ strInput };
             std::getline(iss, part1, '=');                   // get string until '='
             if(part1.back() == ' ')                                      // trim if necessary
@@ -80,11 +79,20 @@ public:
         }
 
         fconfig.close();                                                // close file
+
+        COLS = conf["COLS"];
+        ROWS = conf["ROWS"];
+        BLCKNUM = COLS * ROWS;
+
+        window->setsize(conf["WINDOWWIDTH"], conf["WINDOWHEIGHT"], conf["FULLSCREEN"]);
+        WINDOWWIDTH  = conf["WINDOWWIDTH"];
+        WINDOWHEIGHT = conf["WINDOWHEIGHT"];
+
         return true;
     }
 
 
-    virtual bool Init(){
+    virtual bool Init(const int & argc, char* argv[]){
         // init SDL
         if(!window->Init_SDL())
         {
@@ -94,11 +102,9 @@ public:
         }
         else
         {
-            COLS = conf["COLS"];
-            ROWS = conf["ROWS"];
-            BLCKNUM = COLS * ROWS;
-
             srand(time(0));
+
+            Handle_Console_Args(*window, argc, argv);
 
             for(int i: sprites_ids) {
                 std::string s;
@@ -190,6 +196,10 @@ public:
     }
 
     virtual bool Tick() {
+
+        static double maxspd     = 2 * conf["platform_speed"];                                  // max platform speed
+        static double minspd     = 0.5 * conf["platform_speed"];                                // min platform speed
+        static double bonusspd   = 0.4 * conf["platform_speed"];                                // speed amount added or substracted by ability
 
         unsigned int start_time = SDL_GetTicks();                                                       // get start time
         SDL_RenderClear(window->getrend());                                                    // Fill render with color
@@ -286,35 +296,29 @@ public:
 
         if(platform.ifcatch(ability_down))                  // if catched ability
         {
-            if(platform.getspeed() > 0.5 * conf["platform_speed"])
-            {
-                if( (platform.getspeed() - 0.4 * conf["platform_speed"]) < 0.5 * conf["platform_speed"] )
-                    platform.setspeed(0.5 * conf["platform_speed"]);
+                if( (platform.getspeed() - bonusspd) < minspd )
+                    platform.setspeed(minspd);
                 else
-                    platform.setspeed(platform.getspeed() - 0.4 * conf["platform_speed"]);
+                    platform.addspeed(-1 * bonusspd);
 
                 if(ability_duration <= 0)                      // dont add up time
                     ability_duration = 20;
 
-                std::cout<<  platform.getspeed()<<std::endl;
+                std::cout<<  platform.getspeed()  <<std::endl;
                 ability_down.hide();
-            }
         }
         if(platform.ifcatch(ability_up))                   // if catched ability
         {
-            if(platform.getspeed() < 2 * conf["platform_speed"])
-            {
-                if( (platform.getspeed() + 0.4 * conf["platform_speed"]) > 2 * conf["platform_speed"] )
-                    platform.setspeed(2 * conf["platform_speed"]);
+                if( (platform.getspeed() + bonusspd) > maxspd )
+                    platform.setspeed(maxspd);
                 else
-                    platform.setspeed(platform.getspeed() + 0.4 * conf["platform_speed"]);
+                    platform.addspeed(bonusspd);
 
                 if(ability_duration <= 0)                     // dont add up time
                     ability_duration = 20;
 
-                std::cout<<  platform.getspeed() <<std::endl;
+                std::cout<<  platform.getspeed()  <<std::endl;
                 ability_up.hide();
-            }
         }
 
         ball.draw();

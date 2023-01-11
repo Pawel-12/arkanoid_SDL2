@@ -37,7 +37,7 @@ public:
     SDL_Framework()= default;
     virtual ~SDL_Framework() {};        // virtual desctructor
     virtual bool LoadConfig() = 0;      // read config from text file, returns false if failed, true otherwise
-    virtual bool Init() = 0;            // returns false if Init failed, true otherwise
+    virtual bool Init(const int & argc, char* argv[]) = 0;            // returns false if Init failed, true otherwise
     virtual bool Tick() = 0;            // return value: if true will exit the application
 
     // param: xrel, yrel: The relative motion in the X/Y direction
@@ -49,6 +49,6 @@ public:
 };
 
 // function to run framework
-int frameworkrun(SDL_Framework * f);
+int frameworkrun(SDL_Framework * f, const int & argc, char* argv[]);
 
 #endif //ARKANOID_GAME_SDL2_SDL_FRAMEWORK_H

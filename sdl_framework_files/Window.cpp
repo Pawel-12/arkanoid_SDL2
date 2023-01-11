@@ -23,9 +23,9 @@ bool Window::Init_SDL()
     {
         // Create window
         if (flscr)
-         winSDL = SDL_CreateWindow( "Arkanoid", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, x, y, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
+         winSDL = SDL_CreateWindow( "Arkanoid", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
         else
-         winSDL = SDL_CreateWindow( "Arkanoid", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, x, y, SDL_WINDOW_SHOWN);
+         winSDL = SDL_CreateWindow( "Arkanoid", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 
         // if create window failed
         if( winSDL == nullptr )
@@ -76,4 +76,21 @@ void Window::Close_SDL()
     //Quit SDL subsystems
     SDL_Quit();
 
+}
+
+bool Window::setsize(float w, float h, bool fl)                                               // set Window size
+{
+    if( w>0 && h>0)
+    {
+        width  = w;
+        height = h;
+        flscr  = fl;
+        SDL_SetWindowSize(winSDL, width, height);
+
+        if(flscr)
+        SDL_SetWindowFullscreen(winSDL, SDL_WINDOW_FULLSCREEN);
+
+        return true;
+    }
+    return false;
 }
