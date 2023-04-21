@@ -50,7 +50,7 @@ bool Handle_Console_Args(Window & w, const int & argc, char* argv[] )
     return true;
 }
 
-int frameworkrun(SDL_Framework * f, const int & argc, char* argv[]){
+/*int frameworkrun(SDL_Framework * f, const int & argc, char* argv[]){
 
     if(!f->LoadConfig())
         return 0;
@@ -141,4 +141,4 @@ int frameworkrun(SDL_Framework * f, const int & argc, char* argv[]){
     delete f;
     return 12;
 
-}
+}*/

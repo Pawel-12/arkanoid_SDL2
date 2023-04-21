@@ -8,3 +8,4 @@
 /dataSources.local.xml
 .idea
 cmake-build-debug/
+bin/arkanoid_game_sdl2.exe

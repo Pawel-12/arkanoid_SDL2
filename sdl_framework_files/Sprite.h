@@ -57,6 +57,11 @@ public:
     Sprite(SDL_Renderer * rend, const char * imgpath, const float& vw = WINDOWWIDTH, const float& vh = 0 );       // construct Sprite object
     [[nodiscard]] int getwidth()const{return width;}             // return width
     [[nodiscard]] int getheight()const{return height;}           // return height
+    void setwh(unsigned int w, unsigned int h)                                     // set width and height
+    {
+        width  = w;
+        height = h;
+    }
     SDL_Texture * getobj(){return obj;}                          // return pointer to SDL_Texture object
     SDL_Renderer * getrend(){return render;}                     // return pointer to SDL_Renderer object
 

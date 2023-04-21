@@ -14,9 +14,13 @@ link_directories(${SDL2_LIB_DIR})
 file(
         GLOB_RECURSE SOURCES LIST_DIRECTORIES true
         ${CMAKE_CURRENT_LIST_DIR}/sdl_framework_files/*.cpp
+        game.cpp
+        main.cpp
+        Level.cpp
+        Resources.cpp
 )
 
-add_executable(arkanoid_game_sdl2 main.cpp  ${SOURCES})
+add_executable(arkanoid_game_sdl2 ${SOURCES} )
 set_target_properties(arkanoid_game_sdl2 PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/bin")
 
 

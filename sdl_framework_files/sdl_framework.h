@@ -32,13 +32,13 @@ bool Handle_Console_Args(Window & w, const int & argc, char* argv[] );
 // framework class
 class SDL_Framework {
 private:
-    Window * window{};
+    //Window * window{};
 public:
     SDL_Framework()= default;
     virtual ~SDL_Framework() {};        // virtual desctructor
-    virtual bool LoadConfig() = 0;      // read config from text file, returns false if failed, true otherwise
-    virtual bool Init(const int & argc, char* argv[]) = 0;            // returns false if Init failed, true otherwise
-    virtual bool Tick() = 0;            // return value: if true will exit the application
+    //virtual bool LoadConfig() = 0;      // read config from text file, returns false if failed, true otherwise
+   // virtual bool Init(const int & argc, char* argv[]) = 0;            // returns false if Init failed, true otherwise
+    virtual int Tick() = 0;                                          // return value: if true will exit the application
 
     // param: xrel, yrel: The relative motion in the X/Y direction
     // param: x, y : coordinate, relative to window
