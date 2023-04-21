@@ -1,6 +1,109 @@
-//
-// Created by Pawel on 11.01.2023.
-//
+#include "game.h"
+
+int frameworkrun(Level * f, const int & argc, char* argv[])
+{
+
+    Resources resources;
+    if(!resources.LoadConfig())
+        return 0;
+
+    if(!resources.Init( argc, argv))
+        return 0;
+
+    SDL_Event e;
+    int quit = 0;
+    *f = Level(&resources);
+
+    while (quit != 2){
+        while (SDL_PollEvent(&e)){
+
+            if (e.type == SDL_QUIT)
+                quit = 2;
+
+            if (e.type == SDL_MOUSEMOTION)
+                f->onMouseMove(e.motion.x, e.motion.y, e.motion.xrel, e.motion.yrel );
+
+            if (e.type == SDL_MOUSEBUTTONDOWN) {
+                switch (e.button.button) {
+                    case SDL_BUTTON_LEFT:
+                        f->onMouseButtonClick(FRMouseButton::LEFT, e.button.state);
+                        break;
+
+                    case SDL_BUTTON_MIDDLE:
+                        f->onMouseButtonClick(FRMouseButton::MIDDLE, e.button.state);
+                        break;
+
+                    case SDL_BUTTON_RIGHT:
+                        f->onMouseButtonClick(FRMouseButton::RIGHT, e.button.state);
+                        break;
+                }
+            }
+
+            if (e.type == SDL_KEYDOWN && e.key.type == SDL_KEYDOWN){
+                switch (e.key.keysym.sym) {
+                    case SDLK_RIGHT:
+                    case SDLK_d:
+                        f->onKeyPressed(FRKey::RIGHT, e.key.state);
+                        break;
+
+                    case SDLK_LEFT:
+                    case SDLK_a:
+                        f->onKeyPressed(FRKey::LEFT, e.key.state);
+                        break;
+
+                    case SDLK_UP:
+                    case SDLK_w:
+                        f->onKeyPressed(FRKey::UP, e.key.state);
+                        break;
+
+                    case SDLK_DOWN:
+                    case SDLK_s:
+                        f->onKeyPressed(FRKey::DOWN, e.key.state);
+                        break;
+                }
+            }
+
+            if (e.type == SDL_KEYUP && e.key.type == SDL_KEYUP){
+                switch (e.key.keysym.sym) {
+                    case SDLK_RIGHT:
+                        f->onKeyReleased(FRKey::RIGHT);
+                        break;
+
+                    case SDLK_LEFT:
+                        f->onKeyReleased(FRKey::LEFT);
+                        break;
+
+                    case SDLK_UP:
+                        f->onKeyReleased(FRKey::UP);
+                        break;
+
+                    case SDLK_DOWN:
+                        f->onKeyReleased(FRKey::DOWN);
+                        break;
+                }
+            }
+        }
+
+        if(quit == 2){
+            delete f;
+            f = nullptr;
+            return 11;
+        }
+        else if(quit == 1)
+        {
+            delete f;
+            resources.nextlevel();
+            f = new Level(&resources);
+            quit = 0;
+        }
+        quit = f->Tick();
+    }
+
+    delete f;
+    f = nullptr;
+    return 12;
+
+}
 
 /*#include "game.h"
 
@@ -377,9 +480,5 @@ float WINDOWHEIGHT = 600;
             }
         }
     }
-
      void ARKANOID_GAME::onKeyReleased(FRKey k){}
-
-
-
 */

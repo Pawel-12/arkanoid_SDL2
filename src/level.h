@@ -1,11 +1,6 @@
-//
-// Created by Pawel on 11.01.2023.
-//
+#pragma once
 
-#ifndef ARKANOID_GAME_SDL2_LEVEL_H
-#define ARKANOID_GAME_SDL2_LEVEL_H
-
-#include "sdl_framework_files/sdl_framework.h"
+#include "../sdl_framework_files/sdl_framework.h"
 #include "Ball.h"
 #include "Platform.h"
 #include "Resources.h"
@@ -42,6 +37,3 @@ public:
    // bool LoadConfig(){};
    // bool Init(const int & argc, char* argv[]){};
 };
-
-
-#endif //ARKANOID_GAME_SDL2_LEVEL_H

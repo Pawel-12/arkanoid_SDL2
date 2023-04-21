@@ -14,10 +14,7 @@ link_directories(${SDL2_LIB_DIR})
 file(
         GLOB_RECURSE SOURCES LIST_DIRECTORIES true
         ${CMAKE_CURRENT_LIST_DIR}/sdl_framework_files/*.cpp
-        game.cpp
-        main.cpp
-        Level.cpp
-        Resources.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp
 )
 
 add_executable(arkanoid_game_sdl2 ${SOURCES} )

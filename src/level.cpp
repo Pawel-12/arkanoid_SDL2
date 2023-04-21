@@ -1,13 +1,11 @@
-//
-// Created by Pawel on 11.01.2023.
-//
-
 #include "Level.h"
+
 float WINDOWWIDTH  = 800;
 float WINDOWHEIGHT = 600;
 
 Level::Level(Resources * r): res(r)
-{static int i =1;
+{
+    static int i =1;
     std::cout<<"Level "<<i<<std::endl;
     std::cout<<"Platform speed = "<<res->platform.getspeed()<<std::endl;
     std::cout<<"Ball speed = "<<res->ball.getspeed()<<std::endl;
@@ -164,8 +162,6 @@ int Level::Tick() {
 }
 
 
-
-
 // param: xrel, yrel: The relative motion in the X/Y direction
 // param: x, y : coordinate, relative to window
 void Level::onMouseMove(int x, int y, int xrelative, int yrelative){
@@ -215,6 +211,3 @@ void Level::onKeyPressed(FRKey k, bool isReleased){
 }
 
 //void Level::onKeyReleased(FRKey k){}
-
-
-
